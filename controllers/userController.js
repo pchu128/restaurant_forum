@@ -33,7 +33,7 @@ const userController = {
   },
 
   signInPage: (req, res) => {
-    return res.render('signin')
+    return res.render('/signin')
   },
 
   signIn: (req, res) => {

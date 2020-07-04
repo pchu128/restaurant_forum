@@ -4,7 +4,7 @@ const db = require('./models')
 const bodyParser = require('body-parser')
 const session = require('express-session')
 const app = express()
-const port = 3000
+const port = process.env.PORT || 3000
 const flash = require('connect-flash')
 const passport = require('./config/passport')
 const methodOverride = require('method-override')
@@ -28,7 +28,12 @@ app.use((req, res, next) => {
 
 app.listen(port, () => {
   db.sequelize.sync()
-  console.log(`App listening on port ${port}!`)
+  console.log(`
+  ================================
+  ================================
+  App listening on port ${port}!
+  ================================
+  ================================`)
 })
 
 require('./routes')(app, passport)

@@ -2,6 +2,7 @@ const restController = require('../controllers/restController')
 const adminController = require('../controllers/adminController')
 const userController = require('../controllers/userController')
 const categoryController = require('../controllers/categoryController')
+const commentController = require('../controllers/commentController')
 
 const multer = require('multer')
 const categoryConroller = require('../controllers/categoryController')
@@ -36,13 +37,19 @@ module.exports = (app, passport) => {
   app.delete('/admin/restaurants/:id', authenticatedAdmin, adminController.deleteRestaurant)
   app.get('/admin/users', authenticatedAdmin, adminController.getUsers)
   app.get('/admin/users/:id', authenticatedAdmin, adminController.putUsers)
+
+  // Categories
   app.get('/admin/categories', authenticatedAdmin, categoryConroller.getCategories)
   app.post('/admin/categories', authenticatedAdmin, categoryConroller.postCategory)
   app.get('/admin/categories/:id', authenticatedAdmin, categoryController.getCategories)
   app.put('/admin/categories/:id', authenticatedAdmin, categoryController.putCategory)
   app.delete('/admin/categories/:id', authenticatedAdmin, categoryController.deleteCategory)
 
+  // Individual restaurant page
   app.get('/restaurants/:id', authenticated, restController.getRestaurant)
+
+  // Comment
+  app.post('/comments', authenticated, commentController.postComment)
 
   app.get('/signup', userController.signUpPage)
   app.post('/signup', userController.signUp)

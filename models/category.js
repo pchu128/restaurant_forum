@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      Category.hasMany(models.Restaurant)
     }
   };
   Category.init({
@@ -19,8 +19,5 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'Category',
   });
-  Category.associate = function(models) {
-    Category.hasMany(models.Restaurant)
-  }
   return Category;
 };

@@ -9,7 +9,7 @@ let categoryConroller = {
     }).then(categories => {
       if (req.params.id) {
         Category.findByPk(req.params.id)
-          .then((category) => {
+          .then(category => {
             return res.render('admin/categories', { 
               categories: categories, 
               category: category.toJSON() 
@@ -37,13 +37,13 @@ let categoryConroller = {
 
   putCategory: (req, res) => {
     if (!req.body.name) {
-      req.flash('error_messages', 'name didn\'t exist')
+      req.flash('error_messages', "name didn't exist")
       return res.redirect('back')
     } else {
       return Category.findByPk(req.params.id)
         .then((category) => {
           category.update(req.body)
-            .then((category) => {
+            .then(category=> {
               res.redirect('/admin/categories')
             })
         })

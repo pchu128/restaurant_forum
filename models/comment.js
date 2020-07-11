@@ -10,7 +10,8 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      Comment.belongsTo(models.User)
+      Comment.belongsTo(models.Restaurant)
     }
   };
   Comment.init({
@@ -21,9 +22,5 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'Comment',
   });
-  Comment.associate = function(models) {
-    Comment.belongsTo(models.User)
-    Comment.belongsTo(models.Restaurant)
-  }
   return Comment;
 };

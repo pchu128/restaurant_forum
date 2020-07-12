@@ -37,6 +37,10 @@ module.exports = (app, passport) => {
   app.get('/admin/restaurants/:id/dashboard', authenticatedAdmin, adminController.getRestData)
   app.put('/admin/restaurants/:id', authenticatedAdmin, upload.single('image'), adminController.putRestaurant)
   app.delete('/admin/restaurants/:id', authenticatedAdmin, adminController.deleteRestaurant)
+
+  // top user
+  app.get('/users/top', authenticated, userController.getTopUser)
+
   app.get('/admin/users', authenticatedAdmin, adminController.getUsers)
   app.get('/admin/users/:id', authenticatedAdmin, adminController.putUsers)
 
@@ -66,6 +70,10 @@ module.exports = (app, passport) => {
   // like
   app.post('/like/:restaurantId', authenticated, userController.like)
   app.delete('/like/:restaurantId', authenticated, userController.unlike)
+
+  // follow
+  app.post('/following/:userId', authenticated, userController.addFollowing)
+  app.delete('/following/:userId', authenticated, userController.removeFollowing)
 
   app.get('/signup', userController.signUpPage)
   app.post('/signup', userController.signUp)

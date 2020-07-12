@@ -3,6 +3,7 @@ const Restaurant = db.Restaurant
 const Category = db.Category
 const User = db.User
 const Comment = db.Comment
+const Like = db.Like
 const pageLimit = 10
 
 let restController = {

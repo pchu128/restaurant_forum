@@ -3,7 +3,7 @@ const Restaurant = db.Restaurant
 const Category = db.Category
 const User = db.User
 const Comment = db.Comment
-const Like = db.Like
+const Favorite = db.Favorite
 const pageLimit = 10
 
 let restController = {
@@ -51,22 +51,22 @@ let restController = {
   },
 
   getRestaurant: (req, res) => {
- return Restaurant.findByPk(req.params.id, {
+    return Restaurant.findByPk(req.params.id, {
      include: [
        Category,
        { model: User, as: 'FavoritedUsers' },
        { model: User, as: 'LikedUsers' },
        { model: Comment, include: [User]}
      ]
-   }).then(restaurant => {
-     const isFavorited = restaurant.FavoritedUsers.map(d => d.id).includes(req.user.id)
-     const isLiked = restaurant.LikedUsers.map(d => d.id).includes(req.user.id)
-     return res.render('restaurant', {
-       restaurant: restaurant.toJSON(), 
-       isFavorited: isFavorited,
-       isLiked: isLiked
-     })
-   })
+    }).then(restaurant => {
+        const isFavorited = restaurant.FavoritedUsers.map(d => d.id).includes(req.user.id)
+        const isLiked = restaurant.LikedUsers.map(d => d.id).includes(req.user.id)
+        return res.render('restaurant', {
+          restaurant: restaurant.toJSON(), 
+          isFavorited: isFavorited,
+          isLiked: isLiked
+        })
+    })
   },
 
   getFeeds: (req, res) => {
@@ -91,6 +91,26 @@ let restController = {
       })
     })
   },
+
+  getTopRestaurants: (req, res) => {
+    return Restaurant.findAll({
+      include: [
+        { model: User, as: 'FavoritedUsers' }
+      ]
+    }).then(restaurants => {
+      restaurants = restaurants.map(r => ({
+        ...r.dataValues,
+        FavoritedUsersCounts: r.FavoritedUsers.length,
+        description: r.dataValues.description.substring(0, 50),
+        isFavorited: req.user.FavoritedRestaurants.map(d => d.id).includes(r.id),
+        isLiked: req.user.LikedRestaurants.map(d => d.id).includes(r.id),
+        isFavorited: r.FavoritedUsers.map(d => d.id).includes(r.id)
+      }))
+      restaurants = restaurants.sort((a, b) => b.FavoritedUsers - a.FavoritedUsers).slice(0,10)
+      return res.render('topRestaurants', { restaurants: restaurants })
+    })
+    .catch(e => console.log(e))
+  }
 }
 
 module.exports = restController

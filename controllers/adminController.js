@@ -83,7 +83,9 @@ let adminController = {
         Category,
         Comment
       ]}).then(restaurant => {
-      return res.render('dashboard', { restaurant: restaurant.toJSON() })
+        restaurant.increment('viewCounts')
+        console.log(restaurant.toJSON())
+        return res.render('dashboard', { restaurant: restaurant.toJSON() })
     })
   },
 

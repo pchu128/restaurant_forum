@@ -81,7 +81,7 @@ let restController = {
         })
       })
     })
-  }
+  },
 }
 
 module.exports = restController

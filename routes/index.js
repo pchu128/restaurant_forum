@@ -34,6 +34,7 @@ module.exports = (app, passport) => {
   app.post('/admin/restaurants', authenticatedAdmin, upload.single('image'), adminController.postRestaurant)
   app.get('/admin/restaurants/:id', authenticatedAdmin, adminController.getRestaurant)
   app.get('/admin/restaurants/:id/edit', authenticatedAdmin, adminController.editRestaurant)
+  app.get('/admin/restaurants/:id/dashboard', authenticatedAdmin, adminController.getRestData)
   app.put('/admin/restaurants/:id', authenticatedAdmin, upload.single('image'), adminController.putRestaurant)
   app.delete('/admin/restaurants/:id', authenticatedAdmin, adminController.deleteRestaurant)
   app.get('/admin/users', authenticatedAdmin, adminController.getUsers)

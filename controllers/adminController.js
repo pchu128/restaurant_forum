@@ -1,6 +1,7 @@
 const db = require('../models')
 const Restaurant = db.Restaurant
 const User = db.User
+const Comment = db.Comment
 const Category = db.Category
 const fs = require('fs')
 const imgur = require('imgur-node-api')
@@ -72,6 +73,17 @@ let adminController = {
   getRestaurant: (req, res) => {
     return Restaurant.findByPk(req.params.id, { include: [Category] }).then(restaurant => {
       return res.render('admin/restaurant', { restaurant: restaurant.toJSON() })
+    })
+  },
+
+  // 需要的資料：評論數、瀏覽次數、收藏數
+  getRestData: (req, res) => {
+    return Restaurant.findByPk(req.params.id, {
+      include: [
+        Category,
+        Comment
+      ]}).then(restaurant => {
+      return res.render('dashboard', { restaurant: restaurant.toJSON() })
     })
   },
 

@@ -46,10 +46,11 @@ module.exports = {
           address: faker.address.streetAddress(),
           opening_hour: '08:00',
           image: 'https://loremflickr.com/320/240/restaurant,food/?random=${Math.random() * 100',
+          viewCounts: 0,
           description: faker.lorem.text(),
           createdAt: new Date(),
           updatedAt: new Date(),
-          CategoryId: Math.floor(Math.random() * 5) + 1
+          CategoryId: Math.floor(Math.random() * 7) + 1
         })
       ), {});
   },

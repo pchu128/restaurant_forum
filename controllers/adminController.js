@@ -1,4 +1,5 @@
 const db = require('../models')
+const adminService = require('../services/adminService')
 const Restaurant = db.Restaurant
 const User = db.User
 const Comment = db.Comment
@@ -10,12 +11,8 @@ const IMGUR_CLIENT_ID = '0b1680d05275af6'
 
 let adminController = {
   getRestaurants: (req, res) => {
-    return Restaurant.findAll({ 
-      raw: true,
-      nest: true,
-      include: [Category]
-     }).then(restaurants => {
-      return res.render('admin/restaurants',{ restaurants: restaurants })
+    adminService.getRestaurants(req, res, (data) => {
+      return res.render('admin/restaurants', data)
     })
   },
 

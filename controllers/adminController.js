@@ -75,7 +75,6 @@ let adminController = {
     }
   },
 
-  // 需要的資料：評論數、瀏覽次數、收藏數
   getRestData: (req, res) => {
     return Restaurant.findByPk(req.params.id, {
       include: [

@@ -1,11 +1,12 @@
+const express = require('express')
+const router = express.Router()
+
 const restController = require('../controllers/restController')
 const adminController = require('../controllers/adminController')
 const userController = require('../controllers/userController')
 const categoryController = require('../controllers/categoryController')
 const commentController = require('../controllers/commentController')
 
-const express = require('express')
-const router = express.Router()
 const passport = require('../config/passport')
 
 const multer = require('multer')

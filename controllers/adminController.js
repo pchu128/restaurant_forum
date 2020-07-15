@@ -14,6 +14,7 @@ let adminController = {
     adminService.getRestaurants(req, res, (data) => {
       return res.render('admin/restaurants', data)
     })
+    .catch(err => console.error(err))
   },
 
   createRestaurant: (req, res) => {
@@ -26,7 +27,7 @@ let adminController = {
       })
     })
   },
-
+  
   postRestaurant: (req, res) => {
     if (!req.body.name) {
       req.flash('error_messages', "name didn't exist")

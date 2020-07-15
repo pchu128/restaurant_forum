@@ -9,7 +9,7 @@ const IMGUR_CLIENT_ID = '0b1680d05275af6'
 
 const adminService = {
   getRestaurants: (req, res, callback) => {
-    return Restaurant.findAll({ include: [Category] }).then(restaurants => {
+    return Restaurant.findAll({ raw: true, nest: true, include: [Category] }).then(restaurants => {
       callback({ restaurants: restaurants })
     })
   }

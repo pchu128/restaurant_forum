@@ -17,6 +17,13 @@ let adminController = {
     .catch(err => console.error(err))
   },
 
+  getRestaurant: (req, res) => {
+    adminService.getRestaurant(req, res, (data) => {
+      return res.render('admin/restaurant', data)
+    })
+      .catch(err => console.error(err))
+  },
+
   createRestaurant: (req, res) => {
     Category.findAll({
       raw: true,
@@ -66,12 +73,6 @@ let adminController = {
         return res.redirect('/admin/restaurants')
       })
     }
-  },
-
-  getRestaurant: (req, res) => {
-    return Restaurant.findByPk(req.params.id, { include: [Category] }).then(restaurant => {
-      return res.render('admin/restaurant', { restaurant: restaurant.toJSON() })
-    })
   },
 
   // 需要的資料：評論數、瀏覽次數、收藏數

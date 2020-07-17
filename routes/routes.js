@@ -10,7 +10,6 @@ const commentController = require('../controllers/commentController')
 const passport = require('../config/passport')
 
 const multer = require('multer')
-const categoryConroller = require('../controllers/categoryController')
 const { authenticate } = require('passport')
 const upload = multer({ dest: 'temp/' })
 
@@ -50,8 +49,8 @@ router.get('/admin/users', authenticatedAdmin, adminController.getUsers)
 router.get('/admin/users/:id', authenticatedAdmin, adminController.putUsers)
 
 // Categories
-router.get('/admin/categories', authenticatedAdmin, categoryConroller.getCategories)
-router.post('/admin/categories', authenticatedAdmin, categoryConroller.postCategory)
+router.get('/admin/categories', authenticatedAdmin, categoryController.getCategories)
+router.post('/admin/categories', authenticatedAdmin, categoryController.postCategory)
 router.get('/admin/categories/:id', authenticatedAdmin, categoryController.getCategories)
 router.put('/admin/categories/:id', authenticatedAdmin, categoryController.putCategory)
 router.delete('/admin/categories/:id', authenticatedAdmin, categoryController.deleteCategory)

@@ -31,8 +31,9 @@ router.post('/admin/categories', authenticated, authenticatedAdmin, categoryCont
 router.put('/admin/categories/:id', authenticated, authenticatedAdmin, categoryController.putCategory)
 router.delete('/admin/categories/:id', authenticated, authenticatedAdmin, categoryController.deleteCategory)
 
-// JWT Authentication
+// Authentication with JWT
 router.post('/signin', userController.signIn)
+router.post('/signup', userController.signUp)
 router.get('/admin/restaurants', authenticated, authenticatedAdmin, adminController.getRestaurants)
 
 module.exports = router

@@ -64,9 +64,12 @@ let adminController = {
         Comment
       ]}).then(restaurant => {
         restaurant.increment('viewCounts')
-        console.log(restaurant.toJSON())
-        return res.render('dashboard', { restaurant: restaurant.toJSON() })
-    })
+          .then(restaurant => {
+            return res.render('dashboard', {
+              restaurant: restaurant.toJSON()
+            })
+          })
+        })
   },
 
   editRestaurant: (req, res) => {
